@@ -21,12 +21,16 @@ jobs:
       - name: Crear el issue con diacnostico therian
         env:
           GH_TOKEN: ${{ github.token }}
-          TITULO: "Saludo"
+          TITULO: "diagnostico"
           CUERPO: "Te informamos que no eres un therian, o si?"
           ASIGNADO: ${{ github.event.inputs.user_name }} # Cambia esto por el nombre de usuario
         run: |
-          gh issue create \
-            --title "$TITULO" \
-            --body "$CUERPO" \
-            --assignee "$ASIGNADO"
-            --repo ${{ github.repository }}
+          curl -X POST \
+            -H "Authorization: token ${{ github.token }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues \
+            -d '{
+              "title": ${{ env.TITULO }}
+              "body": ${{ env.CUERPO }},
+              "assignees": [${{ env.ASIGNADO }}]
+            }'
