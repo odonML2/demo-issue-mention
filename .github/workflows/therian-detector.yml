@@ -1,0 +1,31 @@
+name: detector therian
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: 
+    inputs:
+      user_name:      # Este es el ID que usarás luego
+        description: 'nombre de usuario' # Lo que ve el usuario
+        required: true              # ¿Es obligatorio? (true/false)
+        default: 'odonml'    # Texto predefinido
+        type: string                # Tipo de dato (string, boolean, choice, environment)# Permite ejecutarlo manualmente desde la pestaña Actions
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write # Importante: permite a la Action escribir en tu repo
+    
+    steps:
+      - name: Crear el issue con diacnostico therian
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITULO: "Saludo"
+          CUERPO: "Te informamos que no eres un therian, o si?"
+          ASIGNADO: ${{ inputs.user_name }} # Cambia esto por el nombre de usuario
+        run: |
+          gh issue create \
+            --title "$TITULO" \
+            --body "$CUERPO" \
+            --assignee "$ASIGNADO"
