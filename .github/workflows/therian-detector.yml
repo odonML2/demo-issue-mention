@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TITULO: "Saludo"
           CUERPO: "Te informamos que no eres un therian, o si?"
-          ASIGNADO: ${{ inputs.user_name }} # Cambia esto por el nombre de usuario
+          ASIGNADO: ${{ github.event.inputs.user_name }} # Cambia esto por el nombre de usuario
         run: |
           gh issue create \
             --title "$TITULO" \
