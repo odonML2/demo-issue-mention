@@ -29,3 +29,4 @@ jobs:
             --title "$TITULO" \
             --body "$CUERPO" \
             --assignee "$ASIGNADO"
+            --repo ${{ github.repository }}
