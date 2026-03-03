@@ -22,8 +22,8 @@ jobs:
         env:
           REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
+          USER: ${{ github.event.inputs.user_name }}
           TITULO: "diagnostico"
-          CUERPO: "Hola @${{ github.event.inputs.user_name }} :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:"
         run: |
           curl -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
@@ -32,5 +32,5 @@ jobs:
             https://api.github.com/repos/$REPO/issues \
             --data "$(jq -n \
               --arg title "$TITULO" \
-              --arg body "$CUERPO" \
+              --arg body ""Hola @$USER :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:"" \
               '{title: $title, body: $body}')"
