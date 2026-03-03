@@ -24,8 +24,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           USER: ${{ github.event.inputs.user_name }}
           TITULO: "diagnostico"
-          CUERPO: 'Hola @${{env.USER}} :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:'
         run: |
+          CUERPO="Hola @$USER :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:"
           curl -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
