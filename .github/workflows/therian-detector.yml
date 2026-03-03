@@ -23,8 +23,7 @@ jobs:
           REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
           TITULO: "diagnostico"
-          CUERPO: "Te informamos que no eres un therian, o si?"
-          USER: ${{ github.event.inputs.user_name }} # Cambia esto por el nombre de usuario
+          CUERPO: "Hola @${{ github.event.inputs.user_name }} :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:"
         run: |
           curl -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
@@ -34,5 +33,4 @@ jobs:
             --data "$(jq -n \
               --arg title "$TITULO" \
               --arg body "$CUERPO" \
-              --argjson assignees "[\"$USER\"]" \
-              '{title: $title, body: $body, assignees: $assignees}')"
+              '{title: $title, body: $body}')"
