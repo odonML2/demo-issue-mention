@@ -24,7 +24,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           USER: ${{ github.event.inputs.user_name }}
           TITULO: "diagnostico"
-          CUERPO: "Hola @${{env.USER}} :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:"
+          CUERPO: 'Hola @${{env.USER}} :smiley:, te informamos que no eres un therian :dog: :cat:, o si? :thinking:'
         run: |
           curl -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
@@ -35,3 +35,4 @@ jobs:
               --arg title "$TITULO" \
               --arg body "$CUERPO" \
               '{title: $title, body: $body}')"
+
